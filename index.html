@@ -6,32 +6,75 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
+    <link rel="stylesheet" href="style.css" />
     <title>Leafy Locator</title>
   </head>
-  <body>
-    <header>
-      <navbar>
-        <h1>Leafy Locator</h1>
-        <div class="button">
-          <button class="image-btn">Images</button>
-          <button id="location-btn">Location</button>
-        </div>
-      </navbar>
-    </header>
-    <main>
-      <div class="image-container row">
-        <input type="search" id="Search-bar" placeholder="Search bar" />
+  <body
+    class="w-[100vw] h-[100vh] rounded-lg flex justify-center items-center backdrop-blur-sm bg-cover bg-[url('./assets/images/v986-bg-10.jpg')]"
+  >
+    <div class="w-[75%] h-[75%] bg-white">
+      <header class="flex">
+        <navbar class="w-[100%] p-6 flex justify-between content-between">
+          <div>
+            <a href="./index.html"
+              ><img class="w-[100px] h-[70px]" src="./assets/images/logo.png"
+            /></a>
+          </div>
+          <div class="w-[auto] h-[50px] button text-black">
+            <button
+              class="image-btn h-12 w-48 overflow-hidden rounded-lg bg-white text-lg shadow hover:bg-[#E8DE2A]"
+            >
+              Images
+            </button>
+            <button
+              class="h-12 w-48 overflow-hidden rounded-lg bg-white text-lg shadow hover:bg-[#E8DE2A]"
+              id="location-btn"
+            >
+              Location
+            </button>
+          </div>
+        </navbar>
+      </header>
+      <main>
+        <div class="p-6 main-container hidden">
+          <input
+            class="w-full mb-6 border-2 border-s-indigo-500 rounded-lg"
+            type="search"
+            id="Search-bar"
+            placeholder="Search bar"
+          />
 
-        <div class="image-container column">
-          <img src="./assets/flower.jpg" alt="flower" />
+          <div class="image-container flex column">
+            <img
+              class="w-[40%] h-[40%]"
+              src="./assets/flower.jpg"
+              alt="flower"
+            />
+            <div class="w-[50%] px-6 info-container">
+              <h2 class="text-center text-lg">Information</h2>
+              <ul>
+                <li>Name:</li>
+                <li>Other Names:</li>
+                <li>Scientific Names:</li>
+                <li>Watering:</li>
+                <li>Sunlight:</li>
+              </ul>
+            </div>
+          </div>
         </div>
-        <div class="info-container">Info</div>
-      </div>
-
-      <div class="location-container"></div>
-      <div class="map-container"></div>
-      <div class="shop-container">List of shops</div>
-    </main>
+        <div class="map-container">
+          <h1>Nearby Places</h1>
+          <div id="map" style="width: 100%; height: 50vh"></div>
+          <input type="text" id="autocomplete" placeholder="Enter a Location" />
+        </div>
+        <div class="shop-container">List of shops</div>
+      </main>
+    </div>
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBE5R5thgl3XAPd89dJ9XVUZ9sVHBKGNHA&libraries=places&limit=5&callback=initAutocomplete"
+      async
+      defer
+    ></script>
     <script src="script.js"></script>
   </body>
 </html>
