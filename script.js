@@ -4,20 +4,27 @@ var locationBtn = document.querySelector("#location-btn");
 var mainContainer = document.querySelector(".main-container");
 var mapContainer = document.querySelector(".map-container");
 var searchBar = document.querySelector("#Search-bar")
+var searchBtn = document.querySelector(".search")
 
-function getApi() {
-  // fetch request gets a list of all the repos for the node.js organization
-  var requestUrl = `https://perenual.com/api/species-list?page=1&key=${apiKey}`;
+// function getApi() {
+//   // fetch request gets a list of all the repos for the node.js organization
+//   var requestUrl = `https://perenual.com/api/species-list?page=1&key=${apiKey}`;
 
-  fetch(requestUrl)
-    .then(function (response) {
-      return response.json();
-    })
-    .then(function (data) {
-      console.log(data);
-    });
-}
-getApi();
+//   fetch(requestUrl)
+//     .then(function (response) {
+//       return response.json();
+//     })
+//     .then(function (data) {
+//       console.log(data);
+//     });
+// }
+// getApi();
+
+//added search button event listener
+searchBtn.addEventListener('click', function() {
+  console.log(searchBar.value)
+  getPlant()
+})
 
 // searchBar.addEventListener()
 // return response.json();
@@ -161,18 +168,25 @@ function supports_html5_storage() {
 
 
 //need to target data to display to page
-var requestUrl = `https://perenual.com/api/species-list?page=1&key=${apiKey}`;
-var plantName = document.querySelector('#name')
-var otherName = document.querySelector('#other')
-var scientificName = document.querySelector('#scientific')
-var water = document.querySelector('#water')
-var sun = document.querySelector('#sunlight')
-
-fetch(requestUrl)
-  .then(function (response) {
-    return response.json();
-  })
-  .then(function (data) {
-    console.log(data);
-      plantName.innerHTML= `${data.data[0].common_name}`;
-    });
+//completed target data to display*
+function getPlant() {
+  var requestUrl = `https://perenual.com/api/species-list?key=${apiKey}&q=${searchBar.value}`
+  var plantName = document.querySelector('#name')
+  var otherName = document.querySelector('#other')
+  var scientificName = document.querySelector('#scientific')
+  var water = document.querySelector('#water')
+  var sun = document.querySelector('#sunlight')
+  
+  fetch(requestUrl)
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      console.log(data);
+        plantName.innerHTML= `Plant Name: ${data.data[0].common_name}`;
+        otherName.innerHTML= `Other Name: ${data.data[0].other_name}`;
+        scientificName.innerHTML= `Scientific Name: ${data.data[0].scientific_name}`;
+        water.innerHTML= `Watering: ${data.data[0].watering}`;
+        sun.innerHTML= `Sunlight: ${data.data[0].sunlight}`;
+      });
+}
