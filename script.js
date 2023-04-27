@@ -16,10 +16,7 @@ function getApi() {
 
 imgBtn.addEventListener("click", function () {
   console.log("clicked");
-  getApi();
 });
-
-getApi();
 
 // Google Places Map API with Search Box
 // Name search element id="autocomplete"
@@ -72,7 +69,7 @@ function initAutocomplete() {
 
       const icon = {
         // DONE: displays custom icon (sprout) for each marker
-        url: "./assets/images/muhnaufals.png",
+        url: "./assets/images/plant.png",
         size: new google.maps.Size(71, 71),
         origin: new google.maps.Point(0, 0),
         anchor: new google.maps.Point(17, 34),
