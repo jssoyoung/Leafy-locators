@@ -20,6 +20,8 @@ function getApi() {
         getApi()
       })
 
+      getApi()
+
       // Google Places Map API with Search Box
 // Name search element id="autocomplete"
 // Name map element id="map" requires width and height in CSS
