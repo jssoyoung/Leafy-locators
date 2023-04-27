@@ -1,26 +1,24 @@
-var apiKey = 'sk-iCaf64474eccc478b625'
-var imgBtn = document.querySelector('.image-btn')
-
+var apiKey = "sk-iCaf64474eccc478b625";
+var imgBtn = document.querySelector(".image-btn");
 
 function getApi() {
-    // fetch request gets a list of all the repos for the node.js organization
-    var requestUrl = `https://perenual.com/api/species-list?page=1&key=${apiKey}`;
-  
-    fetch(requestUrl)
-      .then(function (response) {
-        return response.json();
-      })
-      .then(function (data) {
-        console.log(data)
-      }
-      )};
+  // fetch request gets a list of all the repos for the node.js organization
+  var requestUrl = `https://perenual.com/api/species-list?page=1&key=${apiKey}`;
 
-      imgBtn.addEventListener('click', function() {
-        console.log('clicked')
-        getApi()
-      })
+  fetch(requestUrl)
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      console.log(data);
+    });
+}
 
-      // Google Places Map API with Search Box
+imgBtn.addEventListener("click", function () {
+  console.log("clicked");
+});
+
+// Google Places Map API with Search Box
 // Name search element id="autocomplete"
 // Name map element id="map" requires width and height in CSS
 
@@ -71,7 +69,7 @@ function initAutocomplete() {
 
       const icon = {
         // DONE: displays custom icon (sprout) for each marker
-        url: "./assets/images/muhnaufals.png",
+        url: "./assets/images/plant.png",
         size: new google.maps.Size(71, 71),
         origin: new google.maps.Point(0, 0),
         anchor: new google.maps.Point(17, 34),
@@ -113,3 +111,36 @@ function initAutocomplete() {
 }
 
 window.initAutocomplete = initAutocomplete;
+
+// Recent Searches:
+
+// Write a local item..
+localStorage.setItem("myKey", "myValue");
+
+// Read a local item..
+var theItemValue = localStorage.getItem("myKey");
+
+// Check for changes in the local item and log them..
+window.addEventListener(
+  "storage",
+  function (event) {
+    console.log(
+      "The value for " +
+        event.key +
+        " was changed from" +
+        event.oldValue +
+        " to " +
+        event.newValue
+    );
+  },
+  false
+);
+
+// Check for HTML5 Storage..
+function supports_html5_storage() {
+  try {
+    return "localStorage" in window && window["localStorage"] !== null;
+  } catch (e) {
+    return false;
+  }
+}
