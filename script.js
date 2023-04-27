@@ -158,3 +158,21 @@ function supports_html5_storage() {
     return false;
   }
 }
+
+
+//need to target data to display to page
+var requestUrl = `https://perenual.com/api/species-list?page=1&key=${apiKey}`;
+var plantName = document.querySelector('#name')
+var otherName = document.querySelector('#other')
+var scientificName = document.querySelector('#scientific')
+var water = document.querySelector('#water')
+var sun = document.querySelector('#sunlight')
+
+fetch(requestUrl)
+  .then(function (response) {
+    return response.json();
+  })
+  .then(function (data) {
+    console.log(data);
+      plantName.innerHTML= `${data.data[0].common_name}`;
+    });
