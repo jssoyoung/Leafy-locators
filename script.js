@@ -1,5 +1,9 @@
 var apiKey = "sk-iCaf64474eccc478b625";
 var imgBtn = document.querySelector(".image-btn");
+var locationBtn = document.querySelector("#location-btn");
+var mainContainer = document.querySelector(".main-container");
+var mapContainer = document.querySelector(".map-container");
+var searchBar = document.querySelector("#Search-bar")
 
 function getApi() {
   // fetch request gets a list of all the repos for the node.js organization
@@ -13,9 +17,19 @@ function getApi() {
       console.log(data);
     });
 }
+getApi();
+
+// searchBar.addEventListener()
+// return response.json();
 
 imgBtn.addEventListener("click", function () {
-  console.log("clicked");
+  mainContainer.setAttribute("class", "show");
+  mapContainer.setAttribute("class", "hidden");
+});
+
+locationBtn.addEventListener("click", function () {
+  mainContainer.setAttribute("class", "hidden");
+  mapContainer.setAttribute("class", "show");
 });
 
 // Google Places Map API with Search Box
