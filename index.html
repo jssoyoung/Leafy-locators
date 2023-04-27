@@ -6,11 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
-    <script
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBE5R5thgl3XAPd89dJ9XVUZ9sVHBKGNHA&libraries=places&limit=5&callback=initAutocomplete"
-      async
-      defer
-    ></script>
     <link rel="stylesheet" href="style.css" />
     <title>Leafy Locator</title>
   </head>
@@ -41,7 +36,7 @@
         </navbar>
       </header>
       <main>
-        <div class="p-6 main-container hidden">
+        <div class="p-6 main-container">
           <input
             class="w-full mb-6 border-2 border-s-indigo-500 rounded-lg"
             type="search"
@@ -67,7 +62,7 @@
             </div>
           </div>
         </div>
-        <div class="map-container relative">
+        <div class="map-container relative hidden">
           <h1>Search Your Plant Store</h1>
           <input
             class="w-[80%]"
@@ -81,5 +76,10 @@
       </main>
     </div>
     <script src="script.js"></script>
+    <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBE5R5thgl3XAPd89dJ9XVUZ9sVHBKGNHA&libraries=places&limit=5&callback=initAutocomplete"
+    async
+    defer
+  ></script>
   </body>
 </html>

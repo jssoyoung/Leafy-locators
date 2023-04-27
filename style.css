@@ -1,3 +1,15 @@
-.hidden {
+.main-container hidden {
     display: none;
+}
+
+.main-container show {
+    display: block;
+}
+
+.map-container hidden {
+    display: none;
+}
+
+.map-container show {
+    display: block;
 }
