@@ -1,30 +1,23 @@
 var apiKey = "sk-iCaf64474eccc478b625";
-var imgBtn = document.querySelector(".image-btn");
+var imgBtn = document.querySelector("#image-btn");
 var locationBtn = document.querySelector("#location-btn");
 var mainContainer = document.querySelector(".main-container");
 var mapContainer = document.querySelector(".map-container");
 var searchBar = document.querySelector("#Search-bar")
-var searchBtn = document.querySelector(".search")
 
-// function getApi() {
-//   // fetch request gets a list of all the repos for the node.js organization
-//   var requestUrl = `https://perenual.com/api/species-list?page=1&key=${apiKey}`;
+function getApi() {
+  // fetch request gets a list of all the repos for the node.js organization
+  var requestUrl = `https://perenual.com/api/species-list?page=1&key=${apiKey}`;
 
-//   fetch(requestUrl)
-//     .then(function (response) {
-//       return response.json();
-//     })
-//     .then(function (data) {
-//       console.log(data);
-//     });
-// }
-// getApi();
-
-//added search button event listener
-searchBtn.addEventListener('click', function() {
-  console.log(searchBar.value)
-  getPlant()
-})
+  fetch(requestUrl)
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      console.log(data);
+    });
+}
+getApi();
 
 // searchBar.addEventListener()
 // return response.json();
@@ -168,8 +161,23 @@ function supports_html5_storage() {
 
 
 //need to target data to display to page
-//completed target data to display*
-function getPlant() {
+var requestUrl = `https://perenual.com/api/species-list?page=1&key=${apiKey}`;
+var plantName = document.querySelector('#name')
+var otherName = document.querySelector('#other')
+var scientificName = document.querySelector('#scientific')
+var water = document.querySelector('#water')
+var sun = document.querySelector('#sunlight')
+
+fetch(requestUrl)
+  .then(function (response) {
+    return response.json();
+  })
+  .then(function (data) {
+    console.log(data);
+      plantName.innerHTML= `${data.data[0].common_name}`;
+    });
+
+    function getPlant() {
   var requestUrl = `https://perenual.com/api/species-list?key=${apiKey}&q=${searchBar.value}`
   var plantName = document.querySelector('#name')
   var otherName = document.querySelector('#other')

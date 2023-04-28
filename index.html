@@ -6,59 +6,96 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link href="https://emoji-css.afeld.me/emoji.css" rel="stylesheet" />
     <link rel="stylesheet" href="style.css" />
     <title>Leafy Locator</title>
   </head>
   <body
-    class="w-[100vw] h-[100vh] rounded-lg flex justify-center items-center backdrop-blur-sm bg-cover bg-[url('./assets/images/v986-bg-10.jpg')]"
+    class="w-[100vw] h-[100vh] relative rounded-lg flex justify-center items-center bg-center bg-no-repeat bg-cover bg-[url('./assets/images/element5-unsplash.jpg')]"
   >
-    <div class="w-[75%] h-[75%] bg-white rounded-lg shadow-lg">
+    <div
+      class="w-[75%] h-[85%] mb-6 bg-green-50 rounded-lg shadow-md bg-opacity-50 border"
+    >
       <header class="flex">
-        <navbar class="w-[100%] p-6 flex justify-between content-between">
-          <div>
-            <a href="./index.html"
-              ><img class="w-[100px] h-[70px]" src="./assets/images/logo.png"
+        <navbar
+          class="w-[100%] rounded-lg p-2 flex justify-between content-between"
+        >
+          <h1
+            class="flex items-center bg-transparent p-2 px-6 text-2xl font-thin tracking-widest pb-2 hover:translate-y-[-0.05rem]"
+          >
+            <a class="flex" href="./index.html"
+              ><span>LEAFY</span
+              ><span
+                class="text-green-600 text-[1rem] tracking-widest font-extrabold"
+              >
+                / </span
+              ><span>LOCATOR</span
+              ><img class="translate-y-[-5px]" src="./assets/images/plant.png"
             /></a>
-          </div>
-          <div class="w-[auto] h-[50px] button text-black">
+          </h1>
+          <div
+            class="btn flex items-center bg-transparent p-2 px-6 text-xl font-thin"
+          >
             <button
-              class="image-btn h-12 w-48 overflow-hidden rounded-lg bg-white text-lg shadow hover:bg-[#E8DE2A]"
+              class="btn group flex items-center bg-transparent p-2 px-6 text-xl font-thin tracking-widest"
+              id="image-btn"
             >
-              Images
+              <span
+                class="relative pb-1 after:transition-transform after:duration-500 after:ease-out after:absolute after:bottom-0 after:left-0 after:block after:h-[2px] after:w-full after:origin-bottom-right after:scale-x-0 after:bg-green-600 after:content-[''] after:group-hover:origin-bottom-left after:group-hover:scale-x-100"
+                >DISCOVER<span class="text-[orange] font-bold">+</span
+                >PLANTS</span
+              >
             </button>
             <button
-              class="h-12 w-48 overflow-hidden rounded-lg bg-white text-lg shadow hover:bg-[#E8DE2A]"
+              class="btn group flex items-center bg-transparent p-2 px-6 text-xl font-thin tracking-widest"
               id="location-btn"
             >
-              Location
+              <span
+                class="relative pb-1 after:transition-transform after:duration-500 after:ease-out after:absolute after:bottom-0 after:left-0 after:block after:h-[2px] after:w-full after:origin-bottom-right after:scale-x-0 after:bg-green-600 after:content-[''] after:group-hover:origin-bottom-left after:group-hover:scale-x-100"
+                >LOCATE<span class="text-[orange] font-bold">+</span
+                >STORES</span
+              >
+            </button>
+            <button
+              class="btn group flex items-center bg-transparent pl-6 text-xl font-thin tracking-widest"
+              id="location-btn"
+            >
+              <span
+                class="relative pb-1 after:transition-transform after:duration-500 after:ease-out after:absolute after:bottom-0 after:left-0 after:block after:h-[2px] after:w-full after:origin-bottom-right after:scale-x-0 after:bg-green-600 after:content-[''] after:group-hover:origin-bottom-left after:group-hover:scale-x-100"
+                >OUR<span class="text-[orange] font-bold">+</span>TEAM</span
+              >
             </button>
           </div>
         </navbar>
       </header>
       <main>
-        <!--created search button and moved class p-6 main-container to div above-->
-        <!--need to style search button-->
-          <div class="p-6 main-container">
-            <div>
-                  <input
-                  class="w-full mb-6 border-2 border-s-indigo-500 rounded-lg"
-                  type="search"
-                  id="Search-bar"
-                  placeholder="Search bar"
-                  />
-                  <button class="search">Search</button>
-            </div>
-                  
-          <div class="image-container flex column">
+        <div class="main-container p-6 w-[100%] flex-col text-center">
+          <div>
+            <input
+              class="w-[90%] mb-6 border border-slate-200 rounded-lg"
+              type="search"
+              id="Search-bar"
+              placeholder="Search for a plant.."
+            />
+            <button id="search-btn">Search</button>
+          </div>
+          <div
+            class="image-container w-[90%] h-[90%] flex mx-auto bg-white rounded-lg shadow-md bg-opacity-70 border"
+          >
             <img
-              class="w-[40%] h-[40%]"
+              class="w-[40%] h-[40%] rounded-lg hover:translate-y-[-0.05rem]"
               src="./assets/flower.jpg"
               alt="flower"
             />
-            <div class="w-[50%] px-6 info-container">
-              <h2 class="text-center text-lg">Information</h2>
+            <div class="w-[70%] px-6 info-container">
+              <h2 class="text-center text-2xl" id="name">Plant Name</h2>
               <ul>
-                <li id="name" >Name:</li>
                 <li id="other">Other Names:</li>
                 <li id="scientific">Scientific Names:</li>
                 <li id="water">Watering:</li>
@@ -66,25 +103,64 @@
               </ul>
             </div>
           </div>
+          <div
+            id="past-searches"
+            class="w-[90%] h-[12rem] mx-auto mt-6 bg-white rounded-lg shadow-md bg-opacity-70 border"
+          >
+            <h2 class="text-center text-2xl font-extrabold">
+              Recent Search Div
+            </h2>
+          </div>
         </div>
-        <div class="map-container relative hidden">
-          <h1>Search Your Plant Store</h1>
+        <div class="w-[90%] p-12 map-container hidden">
+          <h1 class="text-center block pt-6 font-extrabold text-2xl">
+            Search!
+          </h1>
           <input
             class="w-[80%]"
             type="text"
             id="autocomplete"
             placeholder="Enter a Location"
           />
-          <div id="map" style="width: 100%; height: 50vh"></div>
-          <div class="shop-container" id="list-of-stores">List of shops</div>
+          <div class="w-[95%] p-6 flex justify-around gap-6 mx-auto">
+            <div
+              id="map"
+              class="w-[50%] h-[50vh] mx-auto border border-slate-200 rounded-xl"
+            ></div>
+            <div
+              class="w-[50%] h-[auto] max-h-[30rem] overflow-scroll mx-auto bg-white rounded-lg shadow-md bg-opacity-70 border"
+              id="store-container"
+            >
+              <h2 class="text-center text-2xl">SELECTED STORES</h2>
+              <ul id="list-of-stores"></ul>
+            </div>
+          </div>
         </div>
       </main>
+      <footer class="footer p-2">
+        <p>©2023 All Rights Reserved</p>
+        <p>
+          Made with
+          <i
+            class="em em-coffee"
+            aria-role="presentation"
+            aria-label="HOT BEVERAGE"
+          ></i>
+          &
+          <i
+            class="em em-heart"
+            aria-role="presentation"
+            aria-label="HEAVY BLACK HEART"
+          ></i>
+        </p>
+        <p>by Team Leafy Locators</p>
+      </footer>
     </div>
     <script src="script.js"></script>
     <script
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBE5R5thgl3XAPd89dJ9XVUZ9sVHBKGNHA&libraries=places&limit=5&callback=initAutocomplete"
-    async
-    defer
-  ></script>
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBE5R5thgl3XAPd89dJ9XVUZ9sVHBKGNHA&libraries=places&limit=5&callback=initAutocomplete"
+      async
+      defer
+    ></script>
   </body>
 </html>
