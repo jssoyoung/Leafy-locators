@@ -5,6 +5,28 @@ var mainContainer = document.querySelector(".main-container");
 var mapContainer = document.querySelector(".map-container");
 var searchBar = document.querySelector("#Search-bar")
 
+var searchBtn = document.querySelector(".search");
+
+// function getApi() {
+//   // fetch request gets a list of all the repos for the node.js organization
+//   var requestUrl = `https://perenual.com/api/species-list?page=1&key=${apiKey}`;
+
+//   fetch(requestUrl)
+//     .then(function (response) {
+//       return response.json();
+//     })
+//     .then(function (data) {
+//       console.log(data);
+//     });
+// }
+// getApi();
+
+//added search button event listener
+searchBtn.addEventListener("click", function () {
+  console.log(searchBar.value);
+  getPlant();
+});
+
 function getApi() {
   // fetch request gets a list of all the repos for the node.js organization
   var requestUrl = `https://perenual.com/api/species-list?page=1&key=${apiKey}`;
