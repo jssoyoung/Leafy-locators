@@ -1,15 +1,40 @@
 .main-container hidden {
-    display: none;
+  display: none;
 }
 
 .main-container show {
-    display: block;
+  display: block;
 }
 
 .map-container hidden {
-    display: none;
+  display: none;
 }
 
 .map-container show {
-    display: block;
+  display: block;
+}
+
+header {
+  font-family: "Space Grotesk", sans-serif;
+}
+
+#autocomplete {
+  transform: translateX(-11rem) translateY(25.8rem) !important;
+}
+
+.footer {
+  height: auto;
+  width: 100%;
+}
+
+.footer p {
+  opacity: 0.75;
+  font-family: "Space Grotesk", sans-serif !important;
+  line-height: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.25rem;
+  font-weight: 900;
+  font-size: 0.75rem;
+  color: black;
+  text-align: center;
 }
