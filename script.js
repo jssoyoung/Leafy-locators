@@ -1,11 +1,11 @@
-var apiKey = "sk-iCaf64474eccc478b625";
+var apiKey = "sk-vnQq64473cbeb4e2b624";
 var imgBtn = document.querySelector("#image-btn");
 var locationBtn = document.querySelector("#location-btn");
 var mainContainer = document.querySelector(".main-container");
 var mapContainer = document.querySelector(".map-container");
-var searchBar = document.querySelector("#Search-bar")
-
+var searchBar = document.querySelector("#tags");
 var searchBtn = document.querySelector(".search");
+const plantImage = document.querySelector("#plantImage");
 
 // function getApi() {
 //   // fetch request gets a list of all the repos for the node.js organization
@@ -23,7 +23,7 @@ var searchBtn = document.querySelector(".search");
 
 //added search button event listener
 searchBtn.addEventListener("click", function () {
-  console.log(searchBar.value);
+  plantImage.src = "";
   getPlant();
 });
 
@@ -59,94 +59,53 @@ locationBtn.addEventListener("click", function () {
 // Name map element id="map" requires width and height in CSS
 
 // TODO: Update "center" based on user's input; need to grab geocoder for it:
-function initAutocomplete() {
-  const map = new google.maps.Map(document.getElementById("map"), {
-    center: { lat: 33.867, lng: -117.998 },
-    zoom: 13,
-    mapTypeId: "roadmap",
-  });
-  // TODO: change it so that it always searches for "plants" in user's input (location)
-  const input = document.getElementById("autocomplete");
-  const searchBox = new google.maps.places.SearchBox(input);
 
-  map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+var map;
+var service;
+var infowindow;
 
-  map.addListener("bounds_changed", function () {
-    searchBox.setBounds(map.getBounds());
+function initialize() {
+  var pyrmont = new google.maps.LatLng(47.6062, -122.3321);
+
+  map = new google.maps.Map(document.getElementById("map"), {
+    center: pyrmont,
+    zoom: 12,
   });
 
-  let markers = [];
-  let infoWindows = [];
+  var request = {
+    location: pyrmont,
+    radius: "50",
+    query: "plants",
+  };
 
-  searchBox.addListener("places_changed", function () {
-    const places = searchBox.getPlaces();
+  service = new google.maps.places.PlacesService(map);
+  service.textSearch(request, callback);
+}
 
-    if (places.length == 0) {
-      return;
+function callback(results, status) {
+  if (status == google.maps.places.PlacesServiceStatus.OK) {
+    for (var i = 0; i < 5; i++) {
+      createMarker(results[i]);
     }
+  }
+}
 
-    markers.forEach(function (marker) {
-      marker.setMap(null);
-    });
-    infoWindows.forEach(function (infoWindow) {
-      infoWindow.close();
-    });
+function createMarker(place) {
+  if (!place.geometry || !place.geometry.location) return;
 
-    markers = [];
-    infoWindows = [];
+  const marker = new google.maps.Marker({
+    map,
+    position: place.geometry.location,
+  });
 
-    const bounds = new google.maps.LatLngBounds();
+  console.log(place);
 
-    places.forEach(function (place) {
-      if (!place.geometry || !place.geometry.location) {
-        console.log("Returned place contains no geometry");
-        return;
-      }
-
-      const icon = {
-        // DONE: displays custom icon (sprout) for each marker
-        url: "./assets/images/plant.png",
-        size: new google.maps.Size(71, 71),
-        origin: new google.maps.Point(0, 0),
-        anchor: new google.maps.Point(17, 34),
-        scaledSize: new google.maps.Size(25, 25),
-      };
-
-      const marker = new google.maps.Marker({
-        map: map,
-        icon: icon,
-        title: place.name,
-        position: place.geometry.location,
-      });
-      markers.push(marker);
-
-      const infowindow = new google.maps.InfoWindow({
-        content: `${place.name}<br>${place.formatted_address}`,
-        position: place.geometry.location,
-        pixelOffset: new google.maps.Size(-23, -5),
-      });
-
-      infoWindows.push(infowindow);
-
-      marker.addListener("click", function () {
-        infowindow.open(map, marker);
-        // TODO: save the following "li"s in local storage and display them in a separate page
-        let li = document.createElement("li");
-        li.innerHTML = `${place.name}<br>${place.formatted_address}<br>Rating: ${place.rating}/5`;
-        document.getElementById("list-of-stores").appendChild(li);
-      });
-
-      if (place.geometry.viewport) {
-        bounds.union(place.geometry.viewport);
-      } else {
-        bounds.extend(place.geometry.location);
-      }
-    });
-    map.fitBounds(bounds);
+  google.maps.event.addListener(marker, "click", () => {
+    infowindow.setContent(place.name || "");
+    infowindow.open(map);
   });
 }
 
-window.initAutocomplete = initAutocomplete;
 
 // Recent Searches:
 
@@ -181,42 +140,63 @@ function supports_html5_storage() {
   }
 }
 
-
 //need to target data to display to page
 var requestUrl = `https://perenual.com/api/species-list?page=1&key=${apiKey}`;
-var plantName = document.querySelector('#name')
-var otherName = document.querySelector('#other')
-var scientificName = document.querySelector('#scientific')
-var water = document.querySelector('#water')
-var sun = document.querySelector('#sunlight')
+var plantName = document.querySelector("#name");
+var otherName = document.querySelector("#other");
+var scientificName = document.querySelector("#scientific");
+var water = document.querySelector("#water");
+var sun = document.querySelector("#sunlight");
 
 fetch(requestUrl)
   .then(function (response) {
     return response.json();
   })
-  .then(function (data) {
-    console.log(data);
-      plantName.innerHTML= `${data.data[0].common_name}`;
-    });
+  .then(function (data) {});
 
-    function getPlant() {
-  var requestUrl = `https://perenual.com/api/species-list?key=${apiKey}&q=${searchBar.value}`
-  var plantName = document.querySelector('#name')
-  var otherName = document.querySelector('#other')
-  var scientificName = document.querySelector('#scientific')
-  var water = document.querySelector('#water')
-  var sun = document.querySelector('#sunlight')
-  
+function getPlant() {
+  var requestUrl = `https://perenual.com/api/species-list?key=${apiKey}&q=${searchBar.value}`;
+  var plantName = document.querySelector("#name");
+  var otherName = document.querySelector("#other");
+  var scientificName = document.querySelector("#scientific");
+  var water = document.querySelector("#water");
+  var sun = document.querySelector("#sunlight");
+
   fetch(requestUrl)
     .then(function (response) {
       return response.json();
     })
     .then(function (data) {
       console.log(data);
-        plantName.innerHTML= `Plant Name: ${data.data[0].common_name}`;
-        otherName.innerHTML= `Other Name: ${data.data[0].other_name}`;
-        scientificName.innerHTML= `Scientific Name: ${data.data[0].scientific_name}`;
-        water.innerHTML= `Watering: ${data.data[0].watering}`;
-        sun.innerHTML= `Sunlight: ${data.data[0].sunlight}`;
-      });
+      plantName.innerHTML = `Plant Name: ${data.data[0].common_name}`;
+      otherName.innerHTML = `Other Name: ${data.data[0].other_name}`;
+      scientificName.innerHTML = `Scientific Name: ${data.data[0].scientific_name}`;
+      water.innerHTML = `Watering: ${data.data[0].watering}`;
+      sun.innerHTML = `Sunlight: ${data.data[0].sunlight}`;
+      plantImage.src = `${data.data[0].default_image.original_url}`;
+    });
 }
+
+
+let plantNames = [];
+
+for (let i = 0; i <= 1; i++) {
+  fetch(
+    `https://perenual.com/api/species/details/${i}?key=${apiKey}`
+  )
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      plantNames.push(data.common_name);
+    });
+}
+
+$(function () {
+  let availableTags = plantNames;
+  $("#tags").autocomplete({
+    source: availableTags,
+  });
+});
+
+ plantName.innerHTML = plantNames;

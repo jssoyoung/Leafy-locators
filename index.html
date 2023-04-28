@@ -12,6 +12,8 @@
       href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
     <link href="https://emoji-css.afeld.me/emoji.css" rel="stylesheet" />
     <link rel="stylesheet" href="style.css" />
     <title>Leafy Locator</title>
@@ -77,19 +79,20 @@
       <main>
         <div class="main-container p-6 w-[100%] flex-col text-center">
           <div>
-            <input
-              class="w-[90%] mb-6 border border-slate-200 rounded-lg"
-              type="search"
-              id="Search-bar"
-              placeholder="Search for a plant.."
-            />
-            <button class="search"">Search</button>
+            <div
+              class="ui-widget w-[90%] mb-6 border border-slate-200 rounded-lg"
+            >
+              <label for="tags">Tags: </label>
+              <input id="tags" />
+            </div>
+            <button class="search">Search</button>
           </div>
           <div
             class="image-container w-[90%] h-[90%] flex mx-auto bg-white rounded-lg shadow-md bg-opacity-70 border"
           >
             <img
-              class="w-[40%] h-[40%] rounded-lg hover:translate-y-[-0.05rem]"
+              id="plantImage"
+              class="w-[20%] h-[20%] mx-auto rounded-lg hover:translate-y-[-0.05rem]"
               src="./assets/flower.jpg"
               alt="flower"
             />
@@ -158,9 +161,9 @@
     </div>
     <script src="script.js"></script>
     <script
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBE5R5thgl3XAPd89dJ9XVUZ9sVHBKGNHA&libraries=places&limit=5&callback=initAutocomplete"
       async
       defer
+      src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyBE5R5thgl3XAPd89dJ9XVUZ9sVHBKGNHA&callback=initialize"
     ></script>
   </body>
 </html>
