@@ -182,10 +182,17 @@ $(function () {
 });
 
 
-let save = document.querySelector("#save-btn")
-save.addEventListener("click", function(){
-  let search = localStorage.getItem("recentSearch")
-console.log(search)
-let Search1 = document.querySelector("#Search-1");
-Search1.innerHTML = search
+  let save = document.querySelector("#save-btn")
+  save.addEventListener("click", function(){
+    // ask TA how to aviod dupilicating
+    let search = localStorage.getItem("recentSearch")
+    let savedSearchEL = document.createElement("p")
+    savedSearchEL.innerHTML = search 
+  
+  let Search1 = document.querySelector("#Search-1");
+  Search1.appendChild(savedSearchEL)
+
+
 } )
+
+
