@@ -40,6 +40,7 @@ searchBtn.addEventListener("click", function (event) {
   event.preventDefault();
   plantImage.src = "";
   getPlant();
+ 
 });
 
 // searchBar.addEventListener()
@@ -154,7 +155,10 @@ function getPlant() {
       scientificName.innerHTML = `${data.data[0].scientific_name}`;
       water.innerHTML = `Watering: ${data.data[0].watering}`;
       sun.innerHTML = `Sunlight: ${data.data[0].sunlight}`;
-      plantImage.src = `${data.data[0].default_image.thumbnail}`;
+      plantImage.src = `${data.data[0].default_image.thumbnail}`
+      localStorage.setItem("recentSearch", `${data.data[0].common_name}`);
+      
+     
     });
 }
 
@@ -176,3 +180,12 @@ $(function () {
     source: availableTags,
   });
 });
+
+
+let save = document.querySelector("#save-btn")
+save.addEventListener("click", function(){
+  let search = localStorage.getItem("recentSearch")
+console.log(search)
+let Search1 = document.querySelector("#Search-1");
+Search1.innerHTML = search
+} )
