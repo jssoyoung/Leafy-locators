@@ -1,12 +1,26 @@
-var apiKey = "sk-vnQq64473cbeb4e2b624";
+var apiKey = "sk-wAYq644c646faa136638";
 var imgBtn = document.querySelector("#image-btn");
 var locationBtn = document.querySelector("#location-btn");
 var mainContainer = document.querySelector(".main-container");
 var mapContainer = document.querySelector(".map-container");
 var searchBar = document.querySelector("#tags");
-var searchBtn = document.querySelector(".search");
+var searchBtn = document.querySelector("#search-btn");
 const plantImage = document.querySelector("#plantImage");
 
+window.navigator.geolocation.getCurrentPosition(async (position) => {
+  try {
+    let { latitude, longitude } = position.coords;
+    let userWeatherQuery = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=imperial&appid=a0e961f2177e8fbe6ce4c3be4f49a2eb`;
+    let userWeatherData = await fetch(userWeatherQuery);
+    if (!userWeatherData.ok) {
+      throw new Error(`There's an error!`);
+    }
+    let userWeather = await userWeatherData.json();
+  } catch (error) {
+    console.error(error);
+    window.location.replace(`./error.html`);
+  }
+});
 // function getApi() {
 //   // fetch request gets a list of all the repos for the node.js organization
 //   var requestUrl = `https://perenual.com/api/species-list?page=1&key=${apiKey}`;
@@ -22,44 +36,26 @@ const plantImage = document.querySelector("#plantImage");
 // getApi();
 
 //added search button event listener
-searchBtn.addEventListener("click", function () {
+searchBtn.addEventListener("click", function (event) {
+  event.preventDefault();
   plantImage.src = "";
   getPlant();
 });
-
-function getApi() {
-  // fetch request gets a list of all the repos for the node.js organization
-  var requestUrl = `https://perenual.com/api/species-list?page=1&key=${apiKey}`;
-
-  fetch(requestUrl)
-    .then(function (response) {
-      return response.json();
-    })
-    .then(function (data) {
-      console.log(data);
-    });
-}
-getApi();
 
 // searchBar.addEventListener()
 // return response.json();
 
 imgBtn.addEventListener("click", function () {
-  mainContainer.setAttribute("class", "show");
-  mapContainer.setAttribute("class", "hidden");
+  mainContainer.classList.remove("hidden");
+  mapContainer.classList.add("hidden");
 });
 
 locationBtn.addEventListener("click", function () {
-  mainContainer.setAttribute("class", "hidden");
-  mapContainer.setAttribute("class", "show");
+  mapContainer.classList.remove("hidden");
+  mainContainer.classList.add("hidden");
 });
 
-// Google Places Map API with Search Box
-// Name search element id="autocomplete"
-// Name map element id="map" requires width and height in CSS
-
-// TODO: Update "center" based on user's input; need to grab geocoder for it:
-
+// Google Map API:
 var map;
 var service;
 var infowindow;
@@ -106,7 +102,6 @@ function createMarker(place) {
   });
 }
 
-
 // Recent Searches:
 
 // Write a local item..
@@ -140,20 +135,6 @@ function supports_html5_storage() {
   }
 }
 
-//need to target data to display to page
-var requestUrl = `https://perenual.com/api/species-list?page=1&key=${apiKey}`;
-var plantName = document.querySelector("#name");
-var otherName = document.querySelector("#other");
-var scientificName = document.querySelector("#scientific");
-var water = document.querySelector("#water");
-var sun = document.querySelector("#sunlight");
-
-fetch(requestUrl)
-  .then(function (response) {
-    return response.json();
-  })
-  .then(function (data) {});
-
 function getPlant() {
   var requestUrl = `https://perenual.com/api/species-list?key=${apiKey}&q=${searchBar.value}`;
   var plantName = document.querySelector("#name");
@@ -168,22 +149,19 @@ function getPlant() {
     })
     .then(function (data) {
       console.log(data);
-      plantName.innerHTML = `Plant Name: ${data.data[0].common_name}`;
-      otherName.innerHTML = `Other Name: ${data.data[0].other_name}`;
-      scientificName.innerHTML = `Scientific Name: ${data.data[0].scientific_name}`;
+      plantName.innerHTML = `${data.data[0].common_name}`;
+      otherName.innerHTML = `(${data.data[0].other_name})`;
+      scientificName.innerHTML = `${data.data[0].scientific_name}`;
       water.innerHTML = `Watering: ${data.data[0].watering}`;
       sun.innerHTML = `Sunlight: ${data.data[0].sunlight}`;
-      plantImage.src = `${data.data[0].default_image.original_url}`;
+      plantImage.src = `${data.data[0].default_image.thumbnail}`;
     });
 }
 
-
 let plantNames = [];
 
-for (let i = 0; i <= 1; i++) {
-  fetch(
-    `https://perenual.com/api/species/details/${i}?key=${apiKey}`
-  )
+for (let i = 1; i <= 1; i++) {
+  fetch(`https://perenual.com/api/species/details/${i}?key=${apiKey}`)
     .then(function (response) {
       return response.json();
     })
@@ -192,11 +170,9 @@ for (let i = 0; i <= 1; i++) {
     });
 }
 
+let availableTags = plantNames;
 $(function () {
-  let availableTags = plantNames;
   $("#tags").autocomplete({
     source: availableTags,
   });
 });
-
- plantName.innerHTML = plantNames;

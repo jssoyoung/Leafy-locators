@@ -1,25 +1,17 @@
-.main-container hidden {
-  display: none;
-}
-
-.main-container show {
-  display: block;
-}
-
-.map-container hidden {
-  display: none;
-}
-
-.map-container show {
-  display: block;
-}
-
 header {
-  font-family: "Space Grotesk", sans-serif;
+  font-family: "Space Grotesk", sans-serif !important;
+}
+
+main {
+  font-family: 'Space Mono', monospace;
 }
 
 #autocomplete {
   transform: translateX(-11rem) translateY(25.8rem) !important;
+}
+
+.hidden {
+  display: none;
 }
 
 .footer {
@@ -37,4 +29,12 @@ header {
   font-size: 0.75rem;
   color: black;
   text-align: center;
+}
+
+.toggle-checkbox:checked {
+  right: 0;
+  border-color: #68d391;
+}
+.toggle-checkbox:checked + .toggle-label {
+  background-color: #68d391;
 }
