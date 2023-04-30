@@ -178,12 +178,7 @@
           <h1 class="text-center block pt-6 font-extrabold text-2xl">
             Search!
           </h1>
-          <input
-            class="w-[80%]"
-            type="text"
-            id="autocomplete"
-            placeholder="Enter a Location"
-          />
+          <div id="autocomplete" class="autocomplete-container"></div>
           <div class="w-[95%] p-6 flex justify-around gap-6 mx-auto">
             <div
               id="map"
@@ -221,6 +216,7 @@
       </footer>
       <!-- Footer End-->
     </section>
+    <script src="https://unpkg.com/@geoapify/geocoder-autocomplete@^1/dist/index.min.js"></script>
     <script src="script.js"></script>
     <script
       async

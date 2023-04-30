@@ -7,20 +7,20 @@ var searchBar = document.querySelector("#tags");
 var searchBtn = document.querySelector("#search-btn");
 const plantImage = document.querySelector("#plantImage");
 
-window.navigator.geolocation.getCurrentPosition(async (position) => {
-  try {
-    let { latitude, longitude } = position.coords;
-    let userWeatherQuery = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=imperial&appid=a0e961f2177e8fbe6ce4c3be4f49a2eb`;
-    let userWeatherData = await fetch(userWeatherQuery);
-    if (!userWeatherData.ok) {
-      throw new Error(`There's an error!`);
-    }
-    let userWeather = await userWeatherData.json();
-  } catch (error) {
-    console.error(error);
-    window.location.replace(`./error.html`);
+const autocompleteInput = new autocomplete.GeocoderAutocomplete(
+  document.getElementById("autocomplete"),
+  "81c2d48b7df64969bf3750661d9a1023",
+  {
+    types: ["city", "country"],
+    limit: 5,
   }
-});
+);
+
+autocompleteInput.on("select", (location) => {});
+
+autocompleteInput.on("suggestions", (suggestions) => {});
+
+
 // function getApi() {
 //   // fetch request gets a list of all the repos for the node.js organization
 //   var requestUrl = `https://perenual.com/api/species-list?page=1&key=${apiKey}`;
