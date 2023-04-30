@@ -6,6 +6,9 @@ var mapContainer = document.querySelector(".map-container");
 var searchBar = document.querySelector("#tags");
 var searchBtn = document.querySelector("#search-btn");
 const plantImage = document.querySelector("#plantImage");
+const listOfStores = document.querySelector("#list-of-stores");
+let userLocationLat = "";
+let userLocationLon = "";
 
 const autocompleteInput = new autocomplete.GeocoderAutocomplete(
   document.getElementById("autocomplete"),
@@ -16,10 +19,13 @@ const autocompleteInput = new autocomplete.GeocoderAutocomplete(
   }
 );
 
-autocompleteInput.on("select", (location) => {});
+autocompleteInput.on("select", (location) => {
+  userLocationLat = location.properties.lat;
+  userLocationLon = location.properties.lon;
+  initialize();
+});
 
 autocompleteInput.on("suggestions", (suggestions) => {});
-
 
 // function getApi() {
 //   // fetch request gets a list of all the repos for the node.js organization
@@ -40,7 +46,6 @@ searchBtn.addEventListener("click", function (event) {
   event.preventDefault();
   plantImage.src = "";
   getPlant();
- 
 });
 
 // searchBar.addEventListener()
@@ -62,7 +67,10 @@ var service;
 var infowindow;
 
 function initialize() {
-  var pyrmont = new google.maps.LatLng(47.6062, -122.3321);
+  var pyrmont = new google.maps.LatLng(
+    `${userLocationLat}`,
+    `${userLocationLon}`
+  );
 
   map = new google.maps.Map(document.getElementById("map"), {
     center: pyrmont,
@@ -90,14 +98,33 @@ function callback(results, status) {
 function createMarker(place) {
   if (!place.geometry || !place.geometry.location) return;
 
+  const icon = {
+    url: "./assets/images/plant.png",
+    size: new google.maps.Size(71, 71),
+    origin: new google.maps.Point(0, 0),
+    anchor: new google.maps.Point(17, 34),
+    scaledSize: new google.maps.Size(25, 25),
+  };
+
   const marker = new google.maps.Marker({
     map,
+    map: map,
+    icon: icon,
+    title: place.name,
     position: place.geometry.location,
   });
 
   console.log(place);
 
   google.maps.event.addListener(marker, "click", () => {
+    const infowindow = new google.maps.InfoWindow({
+      content: `${place.name}<br>${place.formatted_address}`,
+      position: place.geometry.location,
+      pixelOffset: new google.maps.Size(-2, -22),
+    });
+    let selectedStore = document.createElement("li");
+    selectedStore.innerHTML = `${place.name}<br>${place.formatted_address}`;
+    listOfStores.appendChild(selectedStore);
     infowindow.setContent(place.name || "");
     infowindow.open(map);
   });
@@ -155,10 +182,8 @@ function getPlant() {
       scientificName.innerHTML = `${data.data[0].scientific_name}`;
       water.innerHTML = `Watering: ${data.data[0].watering}`;
       sun.innerHTML = `Sunlight: ${data.data[0].sunlight}`;
-      plantImage.src = `${data.data[0].default_image.thumbnail}`
+      plantImage.src = `${data.data[0].default_image.thumbnail}`;
       localStorage.setItem("recentSearch", `${data.data[0].common_name}`);
-      
-     
     });
 }
 
@@ -181,18 +206,13 @@ $(function () {
   });
 });
 
+let save = document.querySelector("#save-btn");
+save.addEventListener("click", function () {
+  // ask TA how to aviod dupilicating
+  let search = localStorage.getItem("recentSearch");
+  let savedSearchEL = document.createElement("p");
+  savedSearchEL.innerHTML = search;
 
-  let save = document.querySelector("#save-btn")
-  save.addEventListener("click", function(){
-    // ask TA how to aviod dupilicating
-    let search = localStorage.getItem("recentSearch")
-    let savedSearchEL = document.createElement("p")
-    savedSearchEL.innerHTML = search 
-  
   let Search1 = document.querySelector("#Search-1");
-  Search1.appendChild(savedSearchEL)
-
-
-} )
-
-
+  Search1.appendChild(savedSearchEL);
+});
