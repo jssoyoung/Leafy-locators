@@ -8,7 +8,7 @@ Here is an image of the website: ![Portfolio](Assets/website-screenshot.png)
 
 ## Installation
 
-N/A
+No installation is required for this website. The website is deployed using GitHub pages. Click on the link above to access the website.
 
 ## Authors
 
@@ -27,7 +27,16 @@ This website is divided into different sections. The header of the website inclu
 
 ## Credits
 
-N/A 
+* Background Image from [Unsplash](https://unsplash.com/)
+* Icons from [Flaticon](https://www.flaticon.com/)
+* Emojis from [Emoji-CSS](https://emoji-css.afeld.me/)
+* GIF Image from [Giphy](https://giphy.com/)
+* Placeholder Images from [ImageOnline](https://imageonline.co)
+* Google Fonts from [Google Fonts](https://fonts.google.com/)
+* Perenual Plant API from [Perenual API](https://perenual.com/docs/api)
+* Google Maps API from [Google Maps API](https://developers.google.com/maps/documentation/javascript/overview)
+* GeoAPIfy Geocoding API from [GeoAPIfy](https://www.geoapify.com/geocoding-api)
+* Special thanks to UC Berkeley Coding Boot Camp staff: Samantha (Instructor), Lalith (TA) and Gunjan (TA) for helping us with this project.
 
 ## License
 
