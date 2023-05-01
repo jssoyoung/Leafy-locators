@@ -6,10 +6,6 @@ main {
   font-family: "Space Mono", monospace;
 }
 
-#autocomplete {
-  transform: translateX(4.75rem) translateY(38.8rem) !important;
-}
-
 .hidden {
   display: none;
 }
@@ -41,15 +37,13 @@ main {
 
 .geoapify-autocomplete-input {
   padding: 0 31px 0 7px;
-  width: calc(100% - 40px);
-
+  width: calc(100%);
   outline: none;
-
   line-height: 36px;
   height: 36px;
-  border: 1px solid rgba(0, 0, 0, 0.3);
-
   font-size: 14px;
+  border: none;
+  border-radius: 20rem;
 }
 
 .geoapify-autocomplete-items {
@@ -98,8 +92,8 @@ main {
 
 .geoapify-close-button {
   position: absolute;
-  right: 5px;
-  top: 0;
+  right: 20px;
+  top: 32px;
 
   height: 5%;
   display: none;
