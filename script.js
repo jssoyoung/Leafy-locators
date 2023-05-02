@@ -5019,6 +5019,7 @@ let map;
 let service;
 let infowindow;
 let requestUrl;
+let PlantDataNum = localStorage.getItem("PlantDataNum") ?? 1;
 
 // Buttons Event Listeners:
 imgBtn.addEventListener("click", function () {
@@ -5030,8 +5031,8 @@ locateBtn.addEventListener("click", function () {
   mainContainer.classList.add("hidden");
 });
 saveBtn.addEventListener("click", function () {
+  storePlantData();
   // ask TA how to avoid dupilicating
-  let savedSearch = localStorage.getItem("recentSearch");
   let savedSearchEl = document.createElement("div");
   savedSearchEl.classList.add(
     "flex",
@@ -5042,16 +5043,40 @@ saveBtn.addEventListener("click", function () {
     "text-sm",
     "text-center"
   );
-  savedSearchEl.innerHTML = `<img class="w-[100px] h-[100px]" src="${savedSearch.thumbnail}" alt="plant image"/><p>${savedSearch}</p>`;
+  savedSearchEl.innerHTML = `<img class="w-[70px] h-[70px]" src="${plantImage.src}" alt="plant image"/><p>${plantName.textContent}</p>`;
   let savedContainer = document.querySelector("#saved-container");
   savedContainer.appendChild(savedSearchEl);
+  PlantDataNum++;
+  localStorage.setItem("PlantDataNum", PlantDataNum);
 });
 searchBtn.addEventListener("click", function (event) {
   event.preventDefault();
   plantImage.src = "";
   getPlant();
 });
-window.addEventListener("load", () => {});
+window.addEventListener("load", () => {
+  let plantDataCheck = JSON.parse(localStorage.getItem(`plantData-${1}`));
+  if (plantDataCheck === null) {
+    return;
+  } else {
+    for (let i = 1; i < PlantDataNum; i++) {
+      let plantData = JSON.parse(localStorage.getItem(`plantData-${i}`));
+      let savedSearchEl = document.createElement("div");
+      savedSearchEl.classList.add(
+        "flex",
+        "flex-col",
+        "items-center",
+        "mx-2",
+        "font-thin",
+        "text-sm",
+        "text-center"
+      );
+      savedSearchEl.innerHTML = `<img class="w-[70px] h-[70px]" src="${plantData.thumbnail}" alt="plant image"/><p>${plantData.name}</p>`;
+      let savedContainer = document.querySelector("#saved-container");
+      savedContainer.appendChild(savedSearchEl);
+    }
+  }
+});
 
 // Plant Search Bar Jquery UI Autocomplete:
 $(function () {
@@ -5082,8 +5107,18 @@ $(function () {
   });
 });
 
+// Function for storing plant data to local storage:
+function storePlantData() {
+  let plantData = {
+    name: plantName.innerHTML,
+    thumbnail: plantImage.src,
+  };
+  localStorage.setItem(`plantData-${PlantDataNum}`, JSON.stringify(plantData));
+}
+
 // Perenual Plant Information API:
 function getPlant() {
+  saveBtn.classList.remove("pointer-events-none");
   requestUrl = `https://perenual.com/api/species-list?key=${plantApiKey}&q=${searchBar.value}`;
   try {
     fetch(requestUrl)
@@ -5119,7 +5154,6 @@ function getPlant() {
             ? "data not available"
             : plantData.sunlight[1]
         }`;
-        localStorage.setItem("recentSearch", plantData.common_name);
       });
   } catch (error) {
     console.log(error);
