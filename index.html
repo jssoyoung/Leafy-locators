@@ -44,15 +44,15 @@
     <title>the leafy locator</title>
   </head>
   <body
-    class="w-[100vw] h-[100vh] relative rounded-lg flex justify-center bg-bottom bg-no-repeat bg-cover bg-[url('./assets/images/element5-unsplash.jpg')]"
+    class="flex-col mx-auto w-[100vw] h-[100vh] relative rounded-lg lg:flex justify-center bg-bottom bg-no-repeat bg-cover bg-[url('./assets/images/element5-unsplash.jpg')]"
   >
     <section
-      class="w-[75vw] h-[80vh] mt-16 bg-white rounded-lg shadow-md bg-opacity-60 border"
+      class="w-[95%] md:w-[70%] h-[auto] mx-auto mt-16 bg-white rounded-lg shadow-md bg-opacity-60 border"
     >
       <!-- Header Start -->
       <header class="flex">
         <navbar
-          class="w-[100%] rounded-lg p-2 flex justify-between content-between"
+          class="flex-col md:flex-row w-[100%] rounded-lg p-2 flex justify-between content-between"
         >
           <h1
             class="flex items-center bg-transparent p-2 px-6 text-2xl font-thin tracking-widest pb-2 hover:translate-y-[-0.05rem]"
@@ -68,7 +68,7 @@
             /></a>
           </h1>
           <div
-            class="btn flex items-center bg-transparent p-2 px-6 text-xl font-thin"
+            class="flex flex-col sm:flex-row btn items-center bg-transparent p-2 px-6 text-xl font-thin"
           >
             <button
               class="btn group flex items-center bg-transparent p-2 px-6 text-xl font-thin tracking-widest"
@@ -96,8 +96,8 @@
       <!-- Header End -->
       <!-- Main Start -->
       <main>
-        <div class="main-container p-6 w-[100%] flex-col text-center">
-          <form class="w-[75%] mx-auto text-center pb-6">
+        <div class="main-container p-6 w-[100%] flex flex-col text-center">
+          <form class="w-[100%] md:w-[75%] mx-auto text-center pb-6">
             <div class="relative">
               <div
                 class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none mx-auto ui-widget"
@@ -134,7 +134,7 @@
             </div>
           </form>
           <div
-            class="image-container w-[75%] h-[70%] flex mx-auto bg-white rounded-lg shadow-md bg-opacity-70 border"
+            class="image-container w-[100%] h-[100%] flex flex-col md:w-[75%] md:h-[70%] md:flex-row mx-auto bg-white rounded-lg shadow-md bg-opacity-70 border"
           >
             <a
               target="_blank"
@@ -143,15 +143,15 @@
               href="https://www.google.com/images?q=plants"
               ><img
                 id="plantImage"
-                class="shadow-inner w-[230px] h-[230px] box-border mx-12 mt-6 opacity-90 rounded-lg hover:translate-y-[-0.05rem] hover:opacity-100"
+                class="shadow-inner w-[230px] h-[230px] box-border md:mx-12 mx-auto mt-6 opacity-90 rounded-lg hover:translate-y-[-0.05rem] hover:opacity-100"
                 src="./assets/images/image-placeholder.png"
                 alt="plant image"
               />
             </a>
-            <div class="w-[50%] py-6 info-container leading-10">
+            <div class="w-[100%] lg:w-[50%] p-6 info-container leading-10">
               <div class="flex">
                 <h2
-                  class="text-left text-4xl text-extrabold lowercase whitespace-nowrap"
+                  class="text-left text-xl lg:text-4xl text-extrabold lowercase lg:whitespace-nowrap"
                   id="name"
                 >
                   Plant Name
@@ -209,7 +209,7 @@
             </div>
           </div>
           <div
-            class="w-[75%] h-[18vh] flex-col mx-auto my-6 bg-white rounded-lg shadow-md bg-opacity-70 border"
+            class="w-[100%] h-[20rem] lg:w-[75%] lg:h-[18vh] flex flex-col mx-auto my-6 bg-white rounded-lg shadow-md bg-opacity-70 border"
           >
             <h3 class="title text-center text-xl font-thin p-4">
               saved plants
@@ -269,7 +269,7 @@
       </main>
       <!-- Main end-->
       <!-- Footer start-->
-      <footer class="footer fixed py-6 bottom-0 left-0">
+      <footer class="mt-0 footer lg:fixed lg:py-6 lg:bottom-0 lg:left-0">
         <p>©2023 All Rights Reserved</p>
         <p>
           Made with
