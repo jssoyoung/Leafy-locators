@@ -5048,6 +5048,7 @@ saveBtn.addEventListener("click", function () {
   savedContainer.appendChild(savedSearchEl);
   PlantDataNum++;
   localStorage.setItem("PlantDataNum", PlantDataNum);
+  disableBtn();
 });
 searchBtn.addEventListener("click", function (event) {
   event.preventDefault();
@@ -5124,6 +5125,7 @@ function getPlant() {
     fetch(requestUrl)
       .then(function (response) {
         if (!response.ok) {
+          window.location.assign("./error.html")
           throw new Error("Network response error. Try again!");
         } else {
           return response.json();
@@ -5156,7 +5158,7 @@ function getPlant() {
         }`;
       });
   } catch (error) {
-    console.log(error);
+    console.log(error)
   }
 }
 
@@ -5238,4 +5240,9 @@ function createMarker(place) {
     selectedStore.innerHTML = `<a target="_blank" style="font-weight: bold" href="https://www.google.com/search?q=${place.name}+at+${place.formatted_address}">${place.name}</a><br>${place.formatted_address}<br> User Rating: ${place.rating}/5`;
     listOfStores.appendChild(selectedStore);
   });
+}
+
+// Adds disable feature so there are no duplicate saves
+function disableBtn() {
+  saveBtn.classList.add("pointer-events-none");
 }
