@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en" class="scroll-smooth dark">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -30,32 +30,23 @@
         darkMode: "class",
       };
     </script>
-    <style>
-      .toggle-checkbox:checked {
-        right: 0;
-        border-color: #68d391;
-      }
-      .toggle-checkbox:checked + .toggle-label {
-        background-color: #68d391;
-      }
-    </style>
     <link href="https://emoji-css.afeld.me/emoji.css" rel="stylesheet" />
     <link rel="stylesheet" href="style.css" />
     <title>the leafy locator</title>
   </head>
   <body
-    class="flex-col mx-auto w-[100vw] h-[100vh] relative rounded-lg lg:flex justify-center bg-bottom bg-no-repeat bg-cover bg-[url('./assets/images/element5-unsplash.jpg')]"
+    class="flex-col mx-auto w-[100vw] h-[auto] relative md:my-12 md:rounded-lg md:flex justify-center md:bg-right-top md:bg-no-repeat md:bg-cover md:bg-[url('./assets/images/element5-unsplash.jpg')] dark:bg-gray-600 dark:bg-cover dark:bg-no-repeat dark:bg-center md:dark:bg-[url('./assets/images/dm-jake-weirick-unsplash.jpg')]"
   >
     <section
-      class="w-[95%] md:w-[70%] h-[auto] mx-auto mt-16 bg-white rounded-lg shadow-md bg-opacity-60 border"
+      class="relative w-[95%] md:w-[85%] xl:w-[70%] h-[auto] mx-auto dark:shadow-black md:rounded-lg md:shadow-md md:bg-white md:bg-opacity-60 md:border dark:bg-gray-600 dark:bg-opacity-60"
     >
       <!-- Header Start -->
-      <header class="flex">
-        <navbar
-          class="flex-col md:flex-row w-[100%] rounded-lg p-2 flex justify-between content-between"
-        >
+      <header
+        class="pt-2 md:mt-4 md:flex md:px-[3rem] xl:px-[4.5rem] w-full dark:text-white"
+      >
+        <div class="flex justify-between">
           <h1
-            class="flex items-center bg-transparent p-2 px-6 text-2xl font-thin tracking-widest pb-2 hover:translate-y-[-0.05rem]"
+            class="flex items-center bg-transparent px-6 mt-4 md:mt-0 text-xl font-thin tracking-widest hover:translate-y-[-0.05rem]"
           >
             <a class="flex" href="./index.html"
               ><span>LEAFY</span
@@ -67,11 +58,75 @@
               ><img class="translate-y-[-5px]" src="./assets/images/plant.png"
             /></a>
           </h1>
+          <!-- Hamburger start -->
+          <div class="hamburger mx-4 mt-3 md:hidden">
+            <div class="bar1"></div>
+            <div class="bar2"></div>
+            <div class="bar3"></div>
+          </div>
+          <!-- Hamburger end -->
+        </div>
+        <!-- Side Navbar start -->
+        <navbar
+          id="sideNavbar"
+          class="dark:bg-gray-900 block md:hidden flex flex-col opacity-90 w-[50vw] h-full bg-white z-50 absolute right-0 translate-x-[30rem]"
+        >
           <div
-            class="flex flex-col sm:flex-row btn items-center bg-transparent p-2 px-6 text-xl font-thin"
+            class="flex flex-col justify-center md:flex-row btn items-center bg-transparent font-thin translate-y-[5rem]"
           >
             <button
-              class="btn group flex items-center bg-transparent p-2 px-6 text-xl font-thin tracking-widest"
+              class="btn group flex items-center bg-transparent pt-6 px-2 text-sm font-thin tracking-tight"
+              id="image-btn-side"
+            >
+              <span
+                class="relative pb-1 after:transition-transform after:duration-500 after:ease-out after:absolute after:bottom-0 after:left-0 after:block after:h-[2px] after:w-full after:origin-bottom-right after:scale-x-0 after:bg-green-600 after:content-[''] after:group-hover:origin-bottom-left after:group-hover:scale-x-100"
+                >DISCOVER<span class="text-[orange] font-bold">+</span
+                >PLANTS</span
+              >
+            </button>
+            <button
+              class="btn group flex items-center bg-transparent pt-6 px-2 text-sm font-thin tracking-tight"
+              id="location-btn-side"
+            >
+              <span
+                class="relative pb-1 after:transition-transform after:duration-500 after:ease-out after:absolute after:bottom-0 after:left-0 after:block after:h-[2px] after:w-full after:origin-bottom-right after:scale-x-0 after:bg-green-600 after:content-[''] after:group-hover:origin-bottom-left after:group-hover:scale-x-100"
+                >LOCATE<span class="text-[orange] font-bold">+</span
+                >STORES</span
+              >
+            </button>
+          </div>
+          <!-- Side dark mode checkbox start -->
+          <div
+            class="absolute top-0 right-14 md:hidden m-2 inline-block w-10 mr-2 ml-6 mt-6 align-middle select-none transition duration-200 ease-in"
+          >
+            <span
+              id="dark-mode-text"
+              class="text-sm dark:text-white absolute bottom-0 right-12 whitespace-nowrap tracking-tight"
+              >dark mode</span
+            >
+            <input
+              type="checkbox"
+              name="toggle"
+              id="toggle"
+              checked
+              class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer"
+            />
+            <label
+              for="toggle"
+              class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"
+            ></label>
+          </div>
+          <!-- Side dark mode checkbox end -->
+        </navbar>
+        <!-- Side Navbar end -->
+        <navbar
+          class="hidden md:inline flex md:flex-row w-[100%] bg-transparent justify-between content-between"
+        >
+          <div
+            class="flex flex-col md:px-4 md:flex-row btn gap-4 xl:gap-10 justify-end bg-transparent p-2 px-6 text-xl font-thin"
+          >
+            <button
+              class="btn group flex items-center bg-transparent md:text-md font-normal md:tracking-tight"
               id="image-btn"
             >
               <span
@@ -81,7 +136,7 @@
               >
             </button>
             <button
-              class="btn group flex items-center bg-transparent p-2 px-6 text-xl font-thin tracking-widest"
+              class="btn group flex items-center bg-transparent md:text-md font-normal md:tracking-tight"
               id="location-btn"
             >
               <span
@@ -94,11 +149,17 @@
         </navbar>
       </header>
       <!-- Header End -->
-      <!-- Main Start -->
+      <!-- Main start -->
       <main>
-        <div class="main-container p-6 w-[100%] flex flex-col text-center">
-          <form class="w-[100%] md:w-[75%] mx-auto text-center pb-6">
-            <div class="relative">
+        <!-- Discover wrapper start -->
+        <div
+          class="main-container p-2 md:p-6 w-[100%] flex flex-col text-center"
+        >
+          <!-- Plant Search Bar start-->
+          <form class="w-[100%] md:w-[90%] mx-auto text-center pb-6">
+            <div
+              class="dark:shadow-sm dark:shadow-black shadow-md rounded-lg relative"
+            >
               <div
                 class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none mx-auto ui-widget"
               >
@@ -121,37 +182,42 @@
                 type="search"
                 id="tags"
                 class="block p-4 pl-10 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-orange-200 focus:border-orange-200 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                placeholder="Search for a plant.."
                 required
               />
               <button
                 id="search-btn"
                 type="submit"
-                class="text-white absolute right-2.5 bottom-2.5 bg-orange-300 hover:bg-orange-500 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                class="text-white absolute right-2.5 bottom-2.5 bg-orange-300 hover:bg-orange-500 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-green-700 dark:hover:bg-green-800 dark:focus:ring-green-900"
               >
                 Search
               </button>
             </div>
           </form>
+          <!-- Plant Search Bar end-->
+          <!-- Plant Information Container start -->
           <div
-            class="image-container w-[100%] h-[100%] flex flex-col md:w-[75%] md:h-[70%] md:flex-row mx-auto bg-white rounded-lg shadow-md bg-opacity-70 border"
+            class="dark:shadow-black dark:bg-gray-700 dark:bg-opacity-70 image-container w-[100%] h-[100%] flex flex-col items-center md:w-[90%] md:h-[70%] md:flex-row mx-auto bg-white rounded-lg shadow-md bg-opacity-70 border"
           >
-            <a
-              target="_blank"
-              class="translate-y-[1rem] pointer-events-none"
-              id="morePlantImgLink"
-              href="https://www.google.com/images?q=plants"
-              ><img
-                id="plantImage"
-                class="shadow-inner w-[230px] h-[230px] box-border md:mx-12 mx-auto mt-6 opacity-90 rounded-lg hover:translate-y-[-0.05rem] hover:opacity-100"
-                src="./assets/images/image-placeholder.png"
-                alt="plant image"
-              />
-            </a>
-            <div class="w-[100%] lg:w-[50%] p-6 info-container leading-10">
-              <div class="flex">
+            <div>
+              <a
+                target="_blank"
+                class="sm:translate-y-[1rem] pointer-events-none"
+                id="morePlantImgLink"
+                href="https://www.google.com/images?q=plants"
+                ><img
+                  id="plantImage"
+                  class="mt-6 shadow-inner w-[180px] h-[180px] sm:w-[230px] sm:h-[230px] box-border md:mx-12 mx-auto md:mt-6 opacity-90 rounded-lg hover:translate-y-[-0.05rem] hover:opacity-100"
+                  src="./assets/images/image-placeholder.png"
+                  alt="plant image"
+                />
+              </a>
+            </div>
+            <div
+              class="w-[100%] md:w-[60%] my-4 px-2 sm:p-6 info-container leading-10"
+            >
+              <div class="flex items-center">
                 <h2
-                  class="text-left text-xl lg:text-4xl text-extrabold lowercase lg:whitespace-nowrap"
+                  class="dark:text-slate-400 text-left text-md md:text-xl xl:text-4xl font-extrabold sm:text-xl lowercase"
                   id="name"
                 >
                   Plant Name
@@ -159,10 +225,10 @@
                 <button
                   id="save-btn"
                   type="button"
-                  class="pointer-events-none h-10 px-2 mx-4 bg-gray-300 hover:bg-gray-600 rounded-md text-white outline-none focus:ring-4 shadow-sm transform active:scale-y-75 transition-transform flex items-center"
+                  class="pointer-events-none h-8 sm:h-10 px-2 mx-4 dark:bg-slate-800 dark:hover:bg-slate-900 bg-gray-300 hover:bg-gray-600 rounded-md text-white outline-none focus:ring-4 shadow-sm transform active:scale-y-75 transition-transform flex items-center"
                 >
                   <svg
-                    class="h-6 w-6"
+                    class="h-4 w-4 sm:h-6 sm:w-6"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -176,54 +242,78 @@
                   </svg>
                 </button>
               </div>
-              <p id="scientific" class="text-left text-green-700 lowercase">
+              <p
+                id="scientific"
+                class="md:p-2 text-left text-sm text-green-700 lowercase"
+              >
                 Scientific Name
               </p>
-              <p id="other" class="text-left mb-2 lowercase">(Other Name)</p>
-              <div class="flex justify-between">
+              <p
+                id="other"
+                class="dark:text-slate-400 pt-2 text-left text-sm mb-2 lowercase"
+              >
+                (Other Name)
+              </p>
+              <div class="sm:flex sm:justify-between">
                 <ul class="">
                   <li class="text-left">
                     <img
-                      class="w-7 inline pr-2"
+                      class="dark:invert w-7 inline pr-2"
                       src="./assets/images/watering.png"
-                    /><span class="text-xl lowercase" id="water"
+                    /><span
+                      class="dark:text-slate-400 text-sm sm:text-xl lowercase"
+                      id="water"
                       >Watering:</span
                     >
                   </li>
                   <li class="text-left">
                     <img
-                      class="w-7 inline pr-2"
+                      class="dark:invert w-7 inline pr-2"
                       src="./assets/images/sun.png"
-                    /><span class="text-xl lowercase" id="sunlight"
+                    /><span
+                      class="dark:text-slate-400 text-sm sm:text-xl lowercase"
+                      id="sunlight"
                       >Sunlight:</span
                     >
                   </li>
                   <li class="text-left">
                     <img
-                      class="w-7 inline pr-2"
+                      class="dark:invert w-7 inline pr-2"
                       src="./assets/images/shade.png"
-                    /><span class="text-xl lowercase" id="shade">Shade:</span>
+                    /><span
+                      class="dark:text-slate-400 text-sm sm:text-xl lowercase"
+                      id="shade"
+                      >Shade:</span
+                    >
                   </li>
                 </ul>
               </div>
             </div>
           </div>
+          <!-- Plant Information Container end -->
+          <!-- Saved Plants Container start -->
           <div
-            class="w-[100%] h-[20rem] lg:w-[75%] lg:h-[18vh] flex flex-col mx-auto my-6 bg-white rounded-lg shadow-md bg-opacity-70 border"
+            class="dark:shadow-black dark:bg-gray-700 dark:bg-opacity-70 w-[100%] h-[40vh] md:w-[90%] flex flex-col mx-auto my-6 bg-white rounded-lg shadow-md bg-opacity-70 border"
           >
-            <h3 class="title text-center text-xl font-thin p-4">
+            <h3 class="dark:text-white title text-center text-xl font-thin p-4">
               saved plants
             </h3>
             <div
               id="saved-container"
-              class="overflow-scroll w-[auto] h-[12vh] opacity-70 flex gap-4"
+              class="overflow-scroll h-[45vh] w-[auto] opacity-50 flex flex-wrap gap-4"
             ></div>
           </div>
+          <!-- Saved Plants Container end -->
         </div>
-        <!-- Main wrapper end -->
-        <!-- Map wrapper start -->
-        <div class="relative w-[100%] py-6 map-container mx-auto hidden">
-          <div class="relative w-[72.5%] pb-6 mx-auto h-[auto]">
+        <!-- Discover wrapper end -->
+        <!-- Locate wrapper start -->
+        <section
+          class="relative w-[100%] p-2 md:p-6 map-container mx-auto hidden"
+        >
+          <!-- Address Search Bar start -->
+          <div
+            class="relative w-[100%] md:w-[90%] pb-4 md:pb-6 mx-auto h-[auto]"
+          >
             <div
               class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none mx-auto"
             >
@@ -245,33 +335,44 @@
             <div
               type="search"
               id="autocomplete"
-              class="block p-4 pl-10 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-orange-200 focus:border-orange-200 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              class="block p-4 pl-10 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-orange-200 focus:border-orange-200 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-slate-500 dark:focus:ring-blue-500 dark:focus:border-blue-500 shadow-md dark:shadow-sm dark:shadow-black"
               required
             ></div>
           </div>
-          <div class="w-[72.5%] flex gap-4 justify-center mx-auto">
+          <!-- Address Search Bar end -->
+          <!-- Map and Stores wrapper start -->
+          <div
+            class="w-[100%] md:w-[95%] flex flex-col gap-4 justify-center mx-auto"
+          >
+            <!-- Map start -->
             <div
               id="map"
-              class="w-[50%] h-[50vh] mx-auto border border-slate-200 rounded-xl"
+              class="shadow-md dark:shadow-black w-[100%] md:w-[95%] h-[40vh] mx-auto border border-slate-200 rounded-xl"
             ></div>
+            <!-- Map end -->
+            <!-- Store container start -->
             <div
-              class="w-[50%] h-[auto] max-h-[30rem] overflow-scroll mx-auto bg-white rounded-lg shadow-md bg-opacity-70 border"
+              class="my-2 dark:shadow-md dark:shadow-black dark:bg-gray-700 dark:bg-opacity-70 w-[100%] md:w-[95%] h-[30vh] md:w-[50%] md:h-[30vh] max-h-[30rem] mb-6 overflow-scroll mx-auto bg-white rounded-lg shadow-md bg-opacity-70 border"
               id="store-container"
             >
-              <h2 class="title text-center text-xl font-thin p-4">
+              <h2
+                class="dark:text-white title text-center text-xl font-thin pt-2 md:p-4"
+              >
                 selected stores
               </h2>
-              <ul id="list-of-stores"></ul>
+              <ul class="dark:text-white" id="list-of-stores"></ul>
             </div>
+            <!-- Store container end -->
           </div>
-        </div>
-        <!-- Map wrapper end -->
+          <!-- Map and Stores wrapper end -->
+        </section>
+        <!-- Locate wrapper end -->
       </main>
       <!-- Main end-->
       <!-- Footer start-->
-      <footer class="mt-0 footer lg:fixed lg:py-6 lg:bottom-0 lg:left-0">
-        <p>©2023 All Rights Reserved</p>
-        <p>
+      <footer class="my-6 footer">
+        <p class="dark:text-white">©2023 All Rights Reserved</p>
+        <p class="dark:text-white">
           Made with
           <i
             class="em em-coffee"
@@ -285,8 +386,30 @@
             aria-label="HEAVY BLACK HEART"
           ></i>
         </p>
-        <p>by Team Leafy Locators</p>
+        <p class="dark:text-white">by Team Leafy Locators</p>
       </footer>
+      <!-- Dark mode checkbox start -->
+      <div
+        class="absolute hidden md:block md:bottom-3 md:right-2 m-2 inline-block w-10 mr-2 ml-6 mt-6 align-middle select-none transition duration-200 ease-in"
+      >
+        <span
+          id="dark-mode-text"
+          class="dark:text-white absolute bottom-0 right-12 whitespace-nowrap"
+          >dark mode</span
+        >
+        <input
+          type="checkbox"
+          name="toggle2"
+          id="toggle2"
+          checked
+          class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer"
+        />
+        <label
+          for="toggle2"
+          class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"
+        ></label>
+      </div>
+      <!-- Dark mode checkbox end -->
       <!-- Footer End-->
     </section>
     <script src="script.js"></script>
