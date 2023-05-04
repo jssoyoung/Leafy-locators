@@ -1,5 +1,5 @@
 `use strict`;
-// Constants:
+// Constants, plant name autocomplete suggestions array:
 const plantNameSuggestionArr = [
   "Cayouette's Sedge",
   "Sedge",
@@ -5004,10 +5004,17 @@ const wateringCycle = document.querySelector("#water");
 const sunLight = document.querySelector("#sunlight");
 const plantShade = document.querySelector("#shade");
 const moreImgLink = document.querySelector("#morePlantImgLink");
+const hamburger = document.querySelector(".hamburger");
+const sideBar = document.querySelector("#sideNavbar");
+const bar1 = document.querySelector(".bar1");
+const bar2 = document.querySelector(".bar2");
+const bar3 = document.querySelector(".bar3");
 
 // Buttons:
 const imgBtn = document.querySelector("#image-btn");
 const locateBtn = document.querySelector("#location-btn");
+const imgBtnSide = document.querySelector("#image-btn-side");
+const locateBtnSide = document.querySelector("#location-btn-side");
 const searchBtn = document.querySelector("#search-btn");
 const saveBtn = document.querySelector("#save-btn");
 
@@ -5022,39 +5029,6 @@ let requestUrl;
 let PlantDataNum = localStorage.getItem("PlantDataNum") ?? 1;
 
 // Buttons Event Listeners:
-imgBtn.addEventListener("click", function () {
-  mainContainer.classList.remove("hidden");
-  mapContainer.classList.add("hidden");
-});
-locateBtn.addEventListener("click", function () {
-  mapContainer.classList.remove("hidden");
-  mainContainer.classList.add("hidden");
-});
-saveBtn.addEventListener("click", function () {
-  storePlantData();
-  // ask TA how to avoid dupilicating
-  let savedSearchEl = document.createElement("div");
-  savedSearchEl.classList.add(
-    "flex",
-    "flex-col",
-    "items-center",
-    "mx-2",
-    "font-thin",
-    "text-sm",
-    "text-center"
-  );
-  savedSearchEl.innerHTML = `<img class="w-[70px] h-[70px]" src="${plantImage.src}" alt="plant image"/><p>${plantName.textContent}</p>`;
-  let savedContainer = document.querySelector("#saved-container");
-  savedContainer.appendChild(savedSearchEl);
-  PlantDataNum++;
-  localStorage.setItem("PlantDataNum", PlantDataNum);
-  disableBtn();
-});
-searchBtn.addEventListener("click", function (event) {
-  event.preventDefault();
-  plantImage.src = "";
-  getPlant();
-});
 window.addEventListener("load", () => {
   let plantDataCheck = JSON.parse(localStorage.getItem(`plantData-${1}`));
   if (plantDataCheck === null) {
@@ -5065,17 +5039,85 @@ window.addEventListener("load", () => {
       let savedSearchEl = document.createElement("div");
       savedSearchEl.classList.add(
         "flex",
-        "flex-col",
+        "flex-row",
+        "sm:flex-col",
         "items-center",
-        "mx-2",
-        "font-thin",
-        "text-sm",
-        "text-center"
+        "sm:mx-2",
+        "sm:font-thin",
+        "sm:text-sm",
+        "text-center",
+        "dark:text-white"
       );
-      savedSearchEl.innerHTML = `<img class="w-[70px] h-[70px]" src="${plantData.thumbnail}" alt="plant image"/><p>${plantData.name}</p>`;
+      savedSearchEl.innerHTML = `<img class="w-[50px] h-[50px] rounded-xl sm:w-[70px] sm:h-[70px] md:w-[100px] md:h-[100px]" src="${plantData.thumbnail}" alt="plant image"/><p class="sm:whitespace-wrap">${plantData.name}</p>`;
       let savedContainer = document.querySelector("#saved-container");
       savedContainer.appendChild(savedSearchEl);
     }
+  }
+});
+imgBtn.addEventListener("click", function () {
+  mainContainer.classList.remove("hidden");
+  mapContainer.classList.add("hidden");
+});
+locateBtn.addEventListener("click", function () {
+  mapContainer.classList.remove("hidden");
+  mainContainer.classList.add("hidden");
+});
+imgBtnSide.addEventListener("click", function () {
+  mainContainer.classList.remove("hidden");
+  mapContainer.classList.add("hidden");
+});
+locateBtnSide.addEventListener("click", function () {
+  mapContainer.classList.remove("hidden");
+  mainContainer.classList.add("hidden");
+});
+saveBtn.addEventListener("click", function () {
+  storePlantData();
+  // ask TA how to avoid dupilicating
+  let savedSearchEl = document.createElement("div");
+  savedSearchEl.classList.add(
+    "flex",
+    "flex-row",
+    "sm:flex-col",
+    "items-center",
+    "sm:mx-2",
+    "sm:font-thin",
+    "sm:text-sm",
+    "text-center",
+    "dark:text-white"
+  );
+  savedSearchEl.innerHTML = `<img class="w-[50px] h-[50px] rounded-xl sm:w-[70px] sm:h-[70px] md:w-[100px] md:h-[100px]" src="${plantImage.src}" alt="plant image"/><p class="whitespace-wrap">${plantName.textContent}</p>`;
+  let savedContainer = document.querySelector("#saved-container");
+  savedContainer.appendChild(savedSearchEl);
+  PlantDataNum++;
+  localStorage.setItem("PlantDataNum", PlantDataNum);
+  disableBtn();
+});
+searchBtn.addEventListener("click", function (event) {
+  if (searchBar.value === "") {
+    return;
+  }
+  event.preventDefault();
+  plantImage.src = "";
+  getPlant();
+});
+hamburger.addEventListener("click", () => {
+  bar1.classList.toggle("barnimation1");
+  bar2.classList.toggle("barnimation2");
+  bar3.classList.toggle("barnimation3");
+  sideBar.classList.toggle("translate-x-[0rem]");
+});
+document.getElementById("toggle").addEventListener("change", function () {
+  if (this.checked) {
+    document.documentElement.classList.add("dark");
+  } else {
+    document.documentElement.classList.remove("dark");
+  }
+});
+document.getElementById("toggle2").addEventListener("change", function () {
+  if (this.checked) {
+    document.documentElement.classList.add("dark");
+  } else {
+    document.documentElement.classList.remove("dark");
   }
 });
 
@@ -5117,6 +5159,11 @@ function storePlantData() {
   localStorage.setItem(`plantData-${PlantDataNum}`, JSON.stringify(plantData));
 }
 
+// Function for disabling save button:
+function disableBtn() {
+  saveBtn.classList.add("pointer-events-none");
+}
+
 // Perenual Plant Information API:
 function getPlant() {
   saveBtn.classList.remove("pointer-events-none");
@@ -5125,7 +5172,7 @@ function getPlant() {
     fetch(requestUrl)
       .then(function (response) {
         if (!response.ok) {
-          window.location.assign("./error.html")
+          window.location.assign("./error.html");
           throw new Error("Network response error. Try again!");
         } else {
           return response.json();
@@ -5158,7 +5205,7 @@ function getPlant() {
         }`;
       });
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
 }
 
@@ -5221,7 +5268,6 @@ function createMarker(place) {
     map: map,
   });
   google.maps.event.addListener(marker, "click", () => {
-    console.log(place);
     const infowindow = new google.maps.InfoWindow({
       content: `${place.name}`,
       position: marker.getPosition(),
@@ -5235,14 +5281,10 @@ function createMarker(place) {
       "font-size": "1rem",
       "font-weight": "100",
       "border-bottom": "1px solid #ccc",
+      "z-index": "9999",
       padding: "1.75rem",
     });
     selectedStore.innerHTML = `<a target="_blank" style="font-weight: bold" href="https://www.google.com/search?q=${place.name}+at+${place.formatted_address}">${place.name}</a><br>${place.formatted_address}<br> User Rating: ${place.rating}/5`;
     listOfStores.appendChild(selectedStore);
   });
-}
-
-// Adds disable feature so there are no duplicate saves
-function disableBtn() {
-  saveBtn.classList.add("pointer-events-none");
 }

@@ -36,8 +36,8 @@ This website is divided into different sections. The header of the website inclu
 * Perenual Plant API from [Perenual API](https://perenual.com/docs/api)
 * Google Maps API from [Google Maps API](https://developers.google.com/maps/documentation/javascript/overview)
 * GeoAPIfy Geocoding API from [GeoAPIfy](https://www.geoapify.com/geocoding-api)
-* Special thanks to UC Berkeley Coding Boot Camp staff: Samantha (Instructor), Lalith (TA) and Gunjan (TA) for helping us with this project.
+* Special thanks to UC Berkeley Coding Boot Camp staff: Samantha (Instructor), Jin Yi (TA), Lalith (TA) and Gunjan (TA) for helping us with this project.
 
 ## License
 
-Please refer to the LICENSE.md in the repo.
+Licensed under MIT License. Please refer to the LICENSE.md in the repo.
