@@ -5,6 +5,9 @@
 This website was created for plant lovers. The user could use this website to find out information in regards to a specific plant. Using the search bar, the user could look up the name of a plant. The search bar includes an autocomplete widget that will list all of the different types of species associated with the searched word. The user could save certain plants and a list of all the saved searches will display on the bottom of the page using local storage. This website also includes a location feature on the navigation bar. Once the user clicks on the location button, a map will appear. The user could input their location in the form of an address or area code. The map will then display all of the plant stores located near that location. The user could click on a plant store and the address of the plant shop will pop up on the side. This website contains notes on HTML, CSS, and JavaScript. The perenual API and google maps API was used within this website. 
 Here is the link to the website: https://jssoyoung.github.io/Leafy-locators/
 Here is an image of the website: ![Portfolio](assets/images/website-screenshot.png)
+Here is an image of the website when using a mobile device: ![Portfolio](assets/images/mobile-screenshot.png)
+Here is an image of our website on dark-mode: ![Portfolio](assets/images/dm-website-screenshot.png)
+Here is an image of our website on dark-mobile when using a mobile device: ![Portfolio](assets/images/dm-mobile-screenshot.png)
 
 ## Installation
 
